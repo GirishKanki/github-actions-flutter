@@ -28,7 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Route _createSmoothRoute() {
     return PageRouteBuilder(
       transitionDuration: const Duration(milliseconds: 800),
-      pageBuilder: (context, animation, secondaryAnimation) => const BottomNavPage(),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const BottomNavPage(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         final fadeAnimation = CurvedAnimation(
           parent: animation,
@@ -59,10 +60,18 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Align(
               alignment: Alignment.center,
               child: Image.asset(
-                "assets/Images/splash_screen_logo.png",
+                "assets/images/splash_screen_logo.png",
+                errorBuilder: (context, error, stackTrace) {
+                  return const Text(
+                    "Image not found",
+                    textAlign: TextAlign.center,
+                  );
+                },
                 width: 650.w,
                 height: 700.h,
                 fit: BoxFit.contain,
+                cacheWidth: 300,
+                cacheHeight: 300,
               ),
             ),
           ),
@@ -88,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Welcome to",
+                      "शेतकरी बचत गटात",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 24.sp,
@@ -98,18 +107,18 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                     ),
                     Text(
-                      "Shetkari Bachat Gat",
+                      "आपले स्वागत आहे",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 26.sp,
+                        fontSize: 36.sp,
                         fontWeight: FontWeight.w900,
-                        color: AppColors.accentRed,
+                        color: Colors.green,
                         letterSpacing: 1.2,
                       ),
                     ),
                     SizedBox(height: 12.h),
                     Text(
-                      "Growing Together, Saving Together",
+                      "सोबत वाढूया, सोबत बचत करूया",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16.sp,
@@ -120,7 +129,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     SizedBox(height: 20.h),
 
                     /// Button
-                    GeometricButton(onTap: _goToHome, text: "GET STARTED"),
+                    GeometricButton(onTap: _goToHome, text: "सुरुवात करा"),
                   ],
                 ),
               ),

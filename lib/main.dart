@@ -16,6 +16,7 @@ class ShetkariBachatGatApp extends StatelessWidget {
       designSize: const Size(390, 844), // base screen size (iPhone 12)
       minTextAdapt: true, // adapt text size
       splitScreenMode: true, // handle tablets/foldables
+      
       builder: (context, child) {
         return MaterialApp(
           title: 'Shetkari Bachat Gat',
@@ -27,6 +28,7 @@ class ShetkariBachatGatApp extends StatelessWidget {
           home: child, // child is your SplashScreen
         );
       },
+      
       child: const SplashScreen(),
     );
   }
