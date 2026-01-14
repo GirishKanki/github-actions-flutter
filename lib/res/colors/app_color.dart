@@ -9,6 +9,5 @@ class AppColors {
   static const Color white = Colors.white;
   static const Color Splash = Color(0xFFFEEBF6);
 
-  // Example ARGB
   static const Color customGrey = Color.fromARGB(221, 57, 57, 57);
 }

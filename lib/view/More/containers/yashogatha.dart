@@ -30,14 +30,14 @@ class YashogathaScreen extends StatelessWidget {
 
            
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0), 
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),  
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
-                  "assets/images/Ss.png",
+                  'assets/images/person.png',
                   errorBuilder: (context, error, stackTrace) {
                   return const Text("Image not found");},
-                  height: 200,
+                  height: 300,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),

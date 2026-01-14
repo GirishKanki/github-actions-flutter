@@ -1,4 +1,4 @@
-// mero.dart
+
 import 'package:flutter/material.dart';
 import 'package:bachatgat/view/More/containers/prastavana.dart';
 import 'package:bachatgat/view/More/containers/arjachanamuna.dart';
@@ -28,7 +28,7 @@ class MeroPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 37),
-              // Top Section: Welcome and Info
+             
               Container(
                 padding: const EdgeInsets.all(22.0),
                 decoration: BoxDecoration(
@@ -39,14 +39,14 @@ class MeroPage extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Left side: Circle image with black border
+                  
                     Container(
                       width: 90,
                       height: 90,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.black, width: 2),
-                      ),
+                      // decoration: BoxDecoration(
+                      //   shape: BoxShape.circle,
+                      //   border: Border.all(color: Colors.black38, width: 2),
+                      // ),
                       child: ClipOval(
                        child: Image.asset(
                           "assets/images/splash_screen_logo.png",
@@ -58,7 +58,7 @@ class MeroPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 20.0),
-                    // Right side: Text content
+                    
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,15 +93,14 @@ class MeroPage extends StatelessWidget {
                   ],
                 ),
               ),
-             // const SizedBox(height: 10),
-
-              // Existing four containers, now square again
+            
               GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,
                 crossAxisSpacing: 14.0,
                 mainAxisSpacing: 14.0,
+                
                 children: [
                   _buildSquareActionButton(
                     context,
@@ -151,31 +150,30 @@ class MeroPage extends StatelessWidget {
               ),
               
               const SizedBox(height: 10),
-              // The black line you requested
+            
               Container(
-                height: 2,
-                color: Colors.black,
+                height: 1.5,
+                color: Colors.black54,
               ),
               const SizedBox(height: 10),
               
-              // New text line and two new containers as requested
               const Text(
-                'communicate:',
+                'संभाषण:',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF5D5145),
+                  
                 ),
               ),
-             // const SizedBox(height: 15),
-
-              // Stacked full-width containers
+            
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _buildRectangleActionButton(
                     context,
-                    text: 'आमच्याबद्दल',
+                    text: 'आत्मा संस्थेबद्दल',
+                    
                     icon: Icons.info_outline,
                       onTap: () {
                       Navigator.push(
@@ -205,7 +203,6 @@ class MeroPage extends StatelessWidget {
     );
   }
 
-  // A helper method to build the square action buttons
   Widget _buildSquareActionButton(
     BuildContext context, {
     required String text,
@@ -219,6 +216,7 @@ class MeroPage extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.0),
+          border: Border.all(color:Colors.black38),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -248,7 +246,6 @@ class MeroPage extends StatelessWidget {
     );
   }
 
-  // A helper method to build the rectangular action buttons
   Widget _buildRectangleActionButton(
     BuildContext context, {
     required String text,
@@ -262,6 +259,7 @@ class MeroPage extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.0),
+          border: Border.all(color:Colors.black38),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),

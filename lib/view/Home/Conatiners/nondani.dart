@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// ही स्क्रीन शेतकरी गट व समूह निर्मितीची माहिती दर्शवते.
-
 class NondaniScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,7 +11,7 @@ class NondaniScreen extends StatelessWidget {
     style: TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,
-      fontSize: 20, // optional
+      fontSize: 20, 
     ),
   ),
   centerTitle: true,
@@ -44,7 +42,6 @@ class NondaniScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
 
-            // पहिला माहिती विभाग: 'शेतकरी गट व समुह निर्माण करण्यासाठी अवलंबण्याची पद्धत'
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
@@ -86,8 +83,6 @@ class NondaniScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-
-            // दुसरा विभाग: बुलेट पॉईंट्ससह 'उत्पादन वाढ घडविणे'
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
@@ -141,7 +136,6 @@ class NondaniScreen extends StatelessWidget {
     );
   }
 
-  // बुलेट पॉईंट्ससाठी एक सहायक विजेट
   Widget _buildPoint(String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),

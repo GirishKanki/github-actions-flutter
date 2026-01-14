@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// ही स्क्रीन गट प्रमाणपत्राची माहिती दर्शवते.
 
 class PramanpatreScreen extends StatelessWidget {
   @override
@@ -13,7 +12,7 @@ class PramanpatreScreen extends StatelessWidget {
     style: TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,
-      fontSize: 20, // optional
+      fontSize: 20, 
     ),
   ),
   centerTitle: true,
@@ -27,7 +26,6 @@ class PramanpatreScreen extends StatelessWidget {
           children: [
             SizedBox(height: 20),
            
-            // संदर्भ कोडमध्ये असलेल्या इमेजप्रमाणेच एक इमेज सेक्शन
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ClipRRect(
@@ -45,7 +43,6 @@ class PramanpatreScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
 
-            // शीर्षक आणि कागदपत्रे दोन्ही एकाच कंटेनरमध्ये
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
@@ -73,7 +70,7 @@ class PramanpatreScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 10), // शीर्षकानंतर थोडे अंतर
+                  SizedBox(height: 10), 
                   _buildDocumentItem(' गटाने विहित नमुन्यातील प्रस्ताव तालुका कृषी अधिकारी कार्यालयास सपुर्त करणे.'),
                   _buildDocumentItem(' बँकेत खाते उघडण्याबाबतचे व गट नोंदणी बाबदची पूर्व संमती तालुका कृषी अधिकारी यांनी द्यावी.'),
                   _buildDocumentItem(' गटाने बँकेत खाते उघडल्यानंतर तालुका कृषी अधिकारी यांना बँक खात्याच्या पासबुकची झेरॉक्स देण्यात यावी.'),
@@ -88,7 +85,6 @@ class PramanpatreScreen extends StatelessWidget {
     );
   }
 
-  // कागदपत्रे दर्शवण्यासाठी सहायक विजेट
   Widget _buildDocumentItem(String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),

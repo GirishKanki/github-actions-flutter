@@ -13,45 +13,57 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+
+
+
     final List<String> images = [
-      "assets/images/p1.jpg",
+      "assets/images/p7.png",
       "assets/images/p2.jpg",
       "assets/images/p3.jpg",
+      "assets/images/p4.jpg",
+      // "assets/images/p1.jpg",
+      "assets/images/p5.jpg",
+     // "assets/images/p6.jpg",
     ];
 
     final List<Map<String, dynamic>> menuItems = [
       {
         "icon": Icons.person_add,
-        "label": "गट निर्मिती",
+        "label": "बचत गट निर्मिती",
         "page": GatNirmintiInfoScreen(),
       },
       {
         "icon": Icons.app_registration,
-        "label": "गट नोंदणी",
+        "label": "बचत गट नोंदणी",
         "page": NondaniScreen(),
       },
       {
         "icon": Icons.description,
-        "label": "कागदपत्रे",
+        "label": "अवश्य कागदपत्रे",
         "page": KagadpatreScreen(),
       },
-      {"icon": Icons.vpn_key, "label": "गुरुकिल्ली", "page": GurukilliScreen()},
+      {"icon": Icons.vpn_key, 
+      "label": "यशाची गुरुकिल्ली", 
+      "page": GurukilliScreen()},
       {
         "icon": Icons.assignment,
-        "label": "प्रमाणपत्रे",
+        "label": "मूळ प्रमाणपत्रे",
         "page": PramanpatreScreen(),
       },
-      {"icon": Icons.contact_phone, "label": "संपर्क", "page": ContactScreen()},
+      {"icon": Icons.contact_phone, 
+      "label": "संपर्क",
+       "page": ContactScreen()},
     ];
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[100],
+     
       body: SafeArea(
         child: Column(
           children: [
-            // 🔹 Custom Top Bar
-            const SizedBox(height: 12), // adjust height as needed
-            // 🔹 Top 20% Slider
+            const SizedBox(height: 12),
+
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.20,
               child: CarouselSlider(
@@ -92,26 +104,23 @@ class HomePage extends StatelessWidget {
 
             const SizedBox(height: 14),
 
-            // 🔹 Remaining Section with 6 Containers
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                
                 SizedBox(width: 10),
                 Expanded(child: Divider(color: Colors.green, thickness: 1.5)),
                 SizedBox(width: 10),
                 Text(
-                  "विभाग",
+                  "कृषी विभाग",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: Color.fromARGB(195, 1, 1, 1),
                   ),
                 ),
                 SizedBox(width: 10),
                 Expanded(child: Divider(color: Colors.green, thickness: 1.5)),
                 SizedBox(width: 10),
-                
               ],
             ),
 
@@ -136,12 +145,15 @@ class HomePage extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            const Color.fromARGB(254, 255, 255, 255),
+                            const Color.fromARGB(255, 255, 255, 255), 
                             const Color.fromARGB(255, 255, 255, 255),
+                            
                           ],
                         ),
-
+ 
                         borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.black38),
+                        
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black12,
@@ -153,14 +165,14 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(item["icon"], size: 40, color: Colors.green),
+                          Icon(item["icon"], size: 40, color: const Color.fromARGB(206, 76, 175, 79)),
                           const SizedBox(height: 10),
                           Text(
                             item["label"],
                             style: const TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.green,
+                              color: Color.fromARGB(195, 1, 1, 1), 
                             ),
                           ),
                         ],
@@ -173,20 +185,6 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-// 🔹 Dummy Pages for Navigation
-class DummyPage extends StatelessWidget {
-  final String title;
-  const DummyPage({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(child: Text(title, style: const TextStyle(fontSize: 22))),
     );
   }
 }

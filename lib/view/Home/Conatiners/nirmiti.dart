@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class GatNirmintiInfoScreen extends StatelessWidget {
@@ -29,19 +27,36 @@ class GatNirmintiInfoScreen extends StatelessWidget {
            
             SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-              ), 
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  'assets/images/farm.jpg',
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Text("Image not found");
-                  },
+                child: SizedBox(
                   height: 200,
                   width: double.infinity,
-                  fit: BoxFit.cover,
+                  child: FutureBuilder(
+                   
+                    future: Future.delayed(const Duration(seconds: 1)),
+                    builder: (context, snapshot) {
+                      
+                      if (snapshot.connectionState == ConnectionState.done) {
+                       
+                        return Image.asset(
+                          'assets/images/farm.jpg',
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Text("Image not found");
+                          },
+                          fit: BoxFit.cover,
+                        );
+                      } else {
+                        
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.green, 
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ),
               ),
             ),
@@ -172,13 +187,13 @@ class GatNirmintiInfoScreen extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          // मजकूर
+        
           Expanded(
             child: Text(
               text,
               style: TextStyle(
                 fontSize: 16,
-                color: Color(0xFF5D5145), // मजकूर रंग
+                color: Color(0xFF5D5145), 
                 height: 1.5,
               ),
             ),

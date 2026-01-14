@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324830624559",
+    "project_id": "bachat-gat-flutter",
+    "storage_bucket": "bachat-gat-flutter.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324830624559:android:eed3bd82b4b55614907fda",
+        "android_client_info": {
+          "package_name": "com.averta.bachatgat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABEYQX1d30bXBlK1Yz7-fICjRjn-iF93E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

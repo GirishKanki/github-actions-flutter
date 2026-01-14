@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-// हा वर्ग गटाने कृषिविषयक करावयाच्या कामांबद्दल माहिती दर्शवितो.
+ 
 class KrushiKameScreen extends StatelessWidget {
   const KrushiKameScreen({super.key});
-
-  // माहितीसाठी एक सामान्य कंटेनर बनवणारे विजेट
+ 
   Widget _buildInfoContainer(String title, String content) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -24,7 +22,7 @@ class KrushiKameScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // मुख्य शीर्षक
+         
           Text(
             title,
             style: const TextStyle(
@@ -34,7 +32,7 @@ class KrushiKameScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          // मजकूर
+          
           Text(
             content,
             style: const TextStyle(
@@ -58,7 +56,7 @@ class KrushiKameScreen extends StatelessWidget {
     style: TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,
-      fontSize: 20, // optional
+      fontSize: 20,  
     ),
   ),
   centerTitle: true,
@@ -71,10 +69,9 @@ class KrushiKameScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 20),
-
-            // गोलाकार कडा असलेली प्रतिमा
+ 
            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0), // प्रतिमेला सर्व बाजूंनी जागा देण्यासाठी
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),  
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(

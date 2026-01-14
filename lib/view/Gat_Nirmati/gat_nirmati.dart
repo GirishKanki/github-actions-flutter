@@ -19,7 +19,7 @@ class GatNirmitiPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
@@ -35,7 +35,7 @@ class GatNirmitiPage extends StatelessWidget {
             const SizedBox(height: 16),
 
             const Text(
-              "गट समूह निर्मिती:",
+              "गट समूह निर्मिती ",
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -101,7 +101,7 @@ class GatNirmitiPage extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.green.shade50,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.green.shade200, width: 1),
+          border: Border.all(color:  Colors.black38, width: 1),
         ),
         child: Row(
           children: [

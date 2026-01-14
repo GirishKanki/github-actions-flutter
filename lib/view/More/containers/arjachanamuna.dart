@@ -13,23 +13,19 @@ class ArjachaNamunaScreen extends StatefulWidget {
 }
 
 class _ArjachaNamunaScreenState extends State<ArjachaNamunaScreen> {
-  final String assetPDF = "assets/pdfs/Ashitosh_Resume_Update.pdf";
+  final String assetPDF = "assets/pdfs/Gat booklet.pdf";
 
-  /// Function to save asset PDF to storage and open externally
   Future<void> _downloadPDF(BuildContext context) async {
     try {
-      // Load PDF from assets
+       
       final byteData = await rootBundle.load(assetPDF);
-
-      // Get app documents directory
+ 
       final directory = await getApplicationDocumentsDirectory();
-      final filePath = "${directory.path}/Ashitosh_Resume_Update.pdf";
-
-      // Save the file
+      final filePath = "${directory.path}/Gat booklet.pdf";
+ 
       final file = File(filePath);
       await file.writeAsBytes(byteData.buffer.asUint8List());
-
-      // Open with external PDF app
+ 
       await OpenFile.open(filePath);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -48,7 +44,7 @@ class _ArjachaNamunaScreenState extends State<ArjachaNamunaScreen> {
     style: TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,
-      fontSize: 20, // optional
+      fontSize: 20, 
     ),
   ),
   centerTitle: true,
@@ -58,7 +54,7 @@ class _ArjachaNamunaScreenState extends State<ArjachaNamunaScreen> {
 
       body: Column(
         children: [
-          // Intro Text
+           
           Container(
             margin: const EdgeInsets.all(16),
             padding: const EdgeInsets.all(16),

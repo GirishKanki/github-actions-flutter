@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-// हा वर्ग प्रस्तावनेबद्दल माहिती दर्शवितो.
+ 
 class PrastavanaPage extends StatelessWidget {
   const PrastavanaPage({super.key});
 
@@ -14,7 +13,7 @@ class PrastavanaPage extends StatelessWidget {
     style: TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,
-      fontSize: 20, // optional
+      fontSize: 20 
     ),
   ),
   centerTitle: true,
@@ -27,10 +26,9 @@ class PrastavanaPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 20),
-
-            // गोलाकार कडा असलेली प्रतिमा
+ 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0), // प्रतिमेला सर्व बाजूंनी जागा देण्यासाठी
+              padding: const EdgeInsets.symmetric(horizontal: 20.0), 
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
@@ -44,8 +42,7 @@ class PrastavanaPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-
-            // शीर्षक आणि मजकूर एकाच कंटेनरमध्ये
+ 
             _buildInfoContainer(
               title: 'सध्याची शेतीची स्थिती: ',
               content:
@@ -75,8 +72,7 @@ class PrastavanaPage extends StatelessWidget {
       ),
     );
   }
-
-  // हा विजेट शीर्षक आणि मजकूर असलेला कंटेनर तयार करतो
+ 
   Widget _buildInfoContainer({required String title, required String content}) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -96,7 +92,7 @@ class PrastavanaPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // मुख्य शीर्षक
+           
           Text(
             title,
             style: const TextStyle(
@@ -106,7 +102,7 @@ class PrastavanaPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          // मजकूर
+           
           Text(
             content,
             style: const TextStyle(

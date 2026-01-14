@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-// ही स्क्रीन कंपनीबद्दल माहिती दर्शवते.
 class AcmchabaddalScreen extends StatelessWidget {
   const AcmchabaddalScreen({super.key});
 
@@ -9,34 +9,32 @@ class AcmchabaddalScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF9F6F2),
       appBar: AppBar(
-  title: const Text(
-    "आमच्या बद्दल",
-    style: TextStyle(
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
-      fontSize: 20, // optional
-    ),
-  ),
-  centerTitle: true,
-  backgroundColor: Colors.green,
-  iconTheme: const IconThemeData(color: Colors.white),
-),
-
+        title: const Text(
+          "आमच्या बद्दल ",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 20),
-
-            // शीर्षक प्रतिमा
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0), // प्रतिमेला सर्व बाजूंनी जागा देण्यासाठी
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
                   'assets/images/Averta.jpg',
                   errorBuilder: (context, error, stackTrace) {
-                  return const Text("Image not found");},
+                    return const Text("Image not found");
+                  },
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -44,8 +42,6 @@ class AcmchabaddalScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-
-            // आमच्या बद्दल माहिती कंटेनर
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
@@ -65,7 +61,7 @@ class AcmchabaddalScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'आमच्या बद्दल',
+                    'आमच्या बद्दल: ',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -119,13 +115,64 @@ class AcmchabaddalScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'संपर्क साधा: ', 
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF6A4E4E),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+
+                  _buildContactItem(
+                    label: 'वेबसाइट',
+                    value: 'www.avertastrategy.com',
+                    icon: Icons.public,
+                  ),
+                  const SizedBox(height: 10),
+
+                  _buildContactItem(
+                    label: 'ईमेल',
+                    value: 'support@avertastrategy.com',
+                    icon: Icons.email,
+                  ),
+                  const SizedBox(height: 10),
+
+                  _buildContactItem(
+                    label: 'मोबाईल',
+                    value: '8483001178',
+                    icon: Icons.phone,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
 
-  // माहिती दर्शवण्यासाठी सहायक विजेट
   Widget _buildAboutItem(String title, String description, IconData icon) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15.0),
@@ -156,6 +203,56 @@ class AcmchabaddalScreen extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContactItem({
+    required String label,
+    required String value,
+    required IconData icon,
+  }) {
+    String uriScheme;
+    if (label == 'वेबसाइट') {
+      uriScheme = 'https';
+    } else if (label == 'ईमेल') {
+      uriScheme = 'mailto';
+    } else {
+      uriScheme = 'tel';
+    }
+
+    final Uri uri = Uri(scheme: uriScheme, path: value);
+
+    return InkWell(
+      onTap: () async {
+        if (!await launchUrl(uri)) {
+          throw Exception('Could not launch $uri');
+        }
+      },
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.green, size: 24),
+          const SizedBox(width: 15),
+     
+          Text(
+            '$label: ',
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF6A4E4E),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),
             ),
           ),
         ],

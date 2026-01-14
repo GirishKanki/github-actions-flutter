@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:bachatgat/res/colors/app_color.dart';
 import 'package:bachatgat/view/BottomNavigation_Bar/bottomnavigation_view.dart';
 import 'package:flutter/material.dart';
-// import 'package:bachatgat/homepage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -52,6 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
       backgroundColor: AppColors.white,
       body: Column(
         children: [
@@ -67,16 +67,15 @@ class _SplashScreenState extends State<SplashScreen> {
                     textAlign: TextAlign.center,
                   );
                 },
-                width: 650.w,
-                height: 700.h,
+                width: 800.w,
+                height: 650.h,
                 fit: BoxFit.contain,
-                cacheWidth: 300,
-                cacheHeight: 300,
+                // cacheWidth: 300,
+                // cacheHeight: 300,
               ),
             ),
           ),
 
-          /// Bottom section
           Expanded(
             flex: 4,
             child: Container(
@@ -128,7 +127,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                     SizedBox(height: 20.h),
 
-                    /// Button
+                   
                     GeometricButton(onTap: _goToHome, text: "सुरुवात करा"),
                   ],
                 ),
@@ -141,7 +140,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-/// Custom button
 class GeometricButton extends StatelessWidget {
   final VoidCallback onTap;
   final String text;
@@ -155,7 +153,7 @@ class GeometricButton extends StatelessWidget {
       child: Stack(
         children: [
           CustomPaint(
-            size: Size(300.w, 55.h), // responsive size
+            size: Size(300.w, 55.h), 
             painter: GeometricButtonPainter(),
           ),
           Container(
@@ -179,7 +177,6 @@ class GeometricButton extends StatelessWidget {
   }
 }
 
-/// Painter remains same
 class GeometricButtonPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

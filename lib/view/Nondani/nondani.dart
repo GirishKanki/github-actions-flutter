@@ -19,7 +19,7 @@ class _NonadniPageState extends State<NonadniPage> {
   final _establishmentController = TextEditingController();
   final _memberCountController = TextEditingController();
 
-  String _expertRequired = 'No'; // 'Yes' or 'No'
+  String _expertRequired = 'No'; 
 
   @override
   void dispose() {
@@ -84,7 +84,6 @@ class _NonadniPageState extends State<NonadniPage> {
                 _buildInputField('तालुका', _talukaController),
                 _buildInputField('जिल्हा', _jilhaController),
 
-                // ✅ Mobile number with 10-digit validation
                 Container(
                   margin: const EdgeInsets.only(bottom: 15),
                   child: TextFormField(
@@ -136,7 +135,7 @@ class _NonadniPageState extends State<NonadniPage> {
 
                 const SizedBox(height: 15),
                 const Text(
-                  'तुम्हाला तज्ञाची गरज आहे का ? :',
+                  'तुम्हाला तज्ञाची गरज आहे का ? ',
                   style: TextStyle(
                     fontSize: 16,
                     color: Color(0xFF5D5145),
@@ -155,7 +154,6 @@ class _NonadniPageState extends State<NonadniPage> {
     );
   }
 
-  // Reusable input field
   Widget _buildInputField(
     String labelText,
     TextEditingController controller, {
@@ -240,7 +238,7 @@ class _NonadniPageState extends State<NonadniPage> {
     );
   }
 
-  // Submit button
+
   Widget _buildSubmitButton() {
     return ElevatedButton(
       onPressed: _submitForm,

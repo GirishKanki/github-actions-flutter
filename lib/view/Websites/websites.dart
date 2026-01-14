@@ -1,19 +1,17 @@
-// 'website.dart'
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// हा वर्ग महत्त्वाच्या सरकारी संकेतस्थळांची यादी दर्शवितो.
 class WebsitePage extends StatelessWidget {
   const WebsitePage({super.key});
 
-  // वेबसाइट उघडण्यासाठी फंक्शन
   void _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
     if (!await launchUrl(
       uri,
-      mode: LaunchMode.externalApplication, // ✅ force open in browser
+      mode: LaunchMode.externalApplication, 
     )) {
-      // जर URL उघडली नाही तर वापरकर्त्याला सूचना
+      
       throw 'Could not launch $url';
     }
   }
@@ -30,7 +28,6 @@ class WebsitePage extends StatelessWidget {
             children: [
               const SizedBox(height: 50),
 
-              // शीर्षक प्रतिमा
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 0.0),
                 child: ClipRRect(
@@ -51,7 +48,7 @@ class WebsitePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // माहिती मजकूर
+             
               const Text(
                 'येथे महाराष्ट्रातील शेतकऱ्यांसाठी आणि नागरिकांसाठी उपयुक्त महत्त्वाच्या शासकीय संकेतस्थळांची यादी दिली आहे.',
                 style: TextStyle(
@@ -63,7 +60,7 @@ class WebsitePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // कृषी विभाग महाराष्ट्र शासन
+              
               _buildWebsiteContainer(
                 context,
                 'कृषी विभाग महाराष्ट्र शासन',
@@ -72,7 +69,6 @@ class WebsitePage extends StatelessWidget {
               ),
               const SizedBox(height: 15),
 
-              // महाराष्ट्र स्पर्धाक्षम कृषी विकास प्रकल्प (MACP)
               _buildWebsiteContainer(
                 context,
                 'महाराष्ट्र स्पर्धाक्षम कृषी विकास प्रकल्प (MACP)',
@@ -81,7 +77,6 @@ class WebsitePage extends StatelessWidget {
               ),
               const SizedBox(height: 15),
 
-              // कृषी तंत्रज्ञान व्यवस्थापन संस्था (ATMA)
               _buildWebsiteContainer(
                 context,
                 'कृषी तंत्रज्ञान व्यवस्थापन संस्था (ATMA)',
@@ -90,7 +85,6 @@ class WebsitePage extends StatelessWidget {
               ),
               const SizedBox(height: 15),
 
-              // महिला व बालविकास विभाग (WCD)
               _buildWebsiteContainer(
                 context,
                 'महिला व बालविकास विभाग (WCD)',
@@ -113,13 +107,14 @@ class WebsitePage extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(color:Colors.black38),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 5,
               offset: const Offset(0, 3),
-            ),
+            ), 
           ],
         ),
         child: Row(
