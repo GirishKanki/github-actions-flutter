@@ -95,7 +95,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.group),
-                  label: "गट निर्मिती",
+                  label: "फायदे",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.language),

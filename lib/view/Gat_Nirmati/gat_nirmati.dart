@@ -35,7 +35,7 @@ class GatNirmitiPage extends StatelessWidget {
             const SizedBox(height: 16),
 
             const Text(
-              "गट समूह निर्मिती ",
+              "गट समूह निर्मिती – फायदे ",
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,

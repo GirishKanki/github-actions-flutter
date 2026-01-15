@@ -12,12 +12,11 @@ class MeroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    void handleAction(String actionName) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Tapping on: $actionName')));
-    }
-
+    // void handleAction(String actionName) {
+    //   ScaffoldMessenger.of(
+    //     context,
+    //   ).showSnackBar(SnackBar(content: Text('Tapping on: $actionName')));
+    // }
     return Scaffold(
       backgroundColor: const Color(0xFFF9F6F2),
 
@@ -41,8 +40,8 @@ class MeroPage extends StatelessWidget {
                   children: [
                   
                     Container(
-                      width: 90,
-                      height: 90,
+                      width: 100,
+                      height: 100,
                       // decoration: BoxDecoration(
                       //   shape: BoxShape.circle,
                       //   border: Border.all(color: Colors.black38, width: 2),
@@ -79,14 +78,14 @@ class MeroPage extends StatelessWidget {
                               color: Color(0xFF388E3C),
                             ),
                           ),
-                          SizedBox(height: 8.0),
-                          Text(
-                            'version: 2.0',
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              color: Colors.grey,
-                            ),
-                          ),
+                          // SizedBox(height: 8.0),
+                          // Text(
+                          //   'version: 2.0',
+                          //   style: TextStyle(
+                          //     fontSize: 12.0,
+                          //     color: Colors.grey,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -172,9 +171,9 @@ class MeroPage extends StatelessWidget {
                 children: [
                   _buildRectangleActionButton(
                     context,
-                    text: 'आत्मा संस्थेबद्दल',
+                    text: 'आत्मा(ATMA) संस्थेबद्दल',
                     
-                    icon: Icons.info_outline,
+                    icon: Icons.groups,
                       onTap: () {
                       Navigator.push(
                         context,
@@ -212,8 +211,11 @@ class MeroPage extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+  //     height: MediaQuery.of(context).size.width * 0.18,
+  // width: MediaQuery.of(context).size.width * 0.18,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         decoration: BoxDecoration(
+          
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.0),
           border: Border.all(color:Colors.black38),

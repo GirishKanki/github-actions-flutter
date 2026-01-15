@@ -13,18 +13,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
-
-
     final List<String> images = [
-      "assets/images/p7.png",
+      "assets/images/slider2.png",
+
+      "assets/images/p10.png",
+      "assets/images/slider.png",
+
       "assets/images/p2.jpg",
       "assets/images/p3.jpg",
       "assets/images/p4.jpg",
-      // "assets/images/p1.jpg",
+
       "assets/images/p5.jpg",
-     // "assets/images/p6.jpg",
     ];
 
     final List<Map<String, dynamic>> menuItems = [
@@ -43,60 +42,51 @@ class HomePage extends StatelessWidget {
         "label": "अवश्य कागदपत्रे",
         "page": KagadpatreScreen(),
       },
-      {"icon": Icons.vpn_key, 
-      "label": "यशाची गुरुकिल्ली", 
-      "page": GurukilliScreen()},
+      {
+        "icon": Icons.vpn_key,
+        "label": "यशाची गुरुकिल्ली",
+        "page": GurukilliScreen(),
+      },
       {
         "icon": Icons.assignment,
         "label": "मूळ प्रमाणपत्रे",
         "page": PramanpatreScreen(),
       },
-      {"icon": Icons.contact_phone, 
-      "label": "संपर्क",
-       "page": ContactScreen()},
+      {"icon": Icons.contact_phone, "label": "संपर्क", "page": ContactScreen()},
     ];
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
-     
+
       body: SafeArea(
         child: Column(
           children: [
             const SizedBox(height: 12),
 
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.20,
+              height: MediaQuery.of(context).size.height * 0.25,
               child: CarouselSlider(
                 options: CarouselOptions(
                   autoPlay: true,
-                  enlargeCenterPage: true,
+
+                  autoPlayInterval: const Duration(seconds: 4), 
+                  autoPlayAnimationDuration: const Duration(
+                    milliseconds: 400,
+                  ), 
+                  autoPlayCurve: Curves.linearToEaseOut,
+
                   viewportFraction: 1.0,
-                  aspectRatio: 19 / 9,
+                  enlargeCenterPage: false,
                 ),
                 items: images.map((item) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 8,
-                                offset: Offset(0, 0),
-                              ),
-                            ],
-                          ),
-                          child: Image.asset(
-                            item,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                          ),
-                        ),
-                      );
-                    },
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Image.asset(
+                      item,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   );
                 }).toList(),
               ),
@@ -145,15 +135,14 @@ class HomePage extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            const Color.fromARGB(255, 255, 255, 255), 
                             const Color.fromARGB(255, 255, 255, 255),
-                            
+                            const Color.fromARGB(255, 255, 255, 255),
                           ],
                         ),
- 
+
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.black38),
-                        
+
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black12,
@@ -165,14 +154,18 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(item["icon"], size: 40, color: const Color.fromARGB(206, 76, 175, 79)),
+                          Icon(
+                            item["icon"],
+                            size: 40,
+                            color: const Color.fromARGB(206, 76, 175, 79),
+                          ),
                           const SizedBox(height: 10),
                           Text(
                             item["label"],
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(195, 1, 1, 1), 
+                              color: Color.fromARGB(195, 1, 1, 1),
                             ),
                           ),
                         ],

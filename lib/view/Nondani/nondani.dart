@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NonadniPage extends StatefulWidget {
   const NonadniPage({super.key});
@@ -10,6 +11,7 @@ class NonadniPage extends StatefulWidget {
 
 class _NonadniPageState extends State<NonadniPage> {
   final _formKey = GlobalKey<FormState>();
+
   final _bachatGatNameController = TextEditingController();
   final _gaonController = TextEditingController();
   final _talukaController = TextEditingController();
@@ -19,7 +21,8 @@ class _NonadniPageState extends State<NonadniPage> {
   final _establishmentController = TextEditingController();
   final _memberCountController = TextEditingController();
 
-  String _expertRequired = 'No'; 
+  String _expertRequired = 'No';
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -34,25 +37,64 @@ class _NonadniPageState extends State<NonadniPage> {
     super.dispose();
   }
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      print('बचत गटाचे नाव: ${_bachatGatNameController.text}');
-      print('गाव: ${_gaonController.text}');
-      print('तालुका: ${_talukaController.text}');
-      print('जिल्हा: ${_jilhaController.text}');
-      print('मोबाईल नंबर: ${_mobileNumberController.text}');
-      print('उत्पादने किंवा पीक: ${_productsController.text}');
-      print('बचत गट स्थापना: ${_establishmentController.text}');
-      print('बचत गट संख्या: ${_memberCountController.text}');
-      print('तज्ञाची गरज आहे का?: $_expertRequired');
+  Future<void> _submitForm() async {
+    if (!_formKey.currentState!.validate()) return;
 
+    setState(() => _isLoading = true);
+
+    final String emailBody = '''
+बचत गटाचे नाव: ${_bachatGatNameController.text}
+गाव: ${_gaonController.text}
+तालुका: ${_talukaController.text}
+जिल्हा: ${_jilhaController.text}
+मोबाईल नंबर: ${_mobileNumberController.text}
+उत्पादने / पीक: ${_productsController.text}
+स्थापना वर्ष: ${_establishmentController.text}
+सदस्य संख्या: ${_memberCountController.text}
+तज्ञाची गरज: ${_expertRequired == 'Yes' ? 'हो' : 'नाही'}
+''';
+
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: 'ashitosh.avertatech@gmail.com',
+      queryParameters: {
+        'subject': 'नवीन बचत गट नोंदणी',
+        'body': emailBody,
+      },
+    );
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (await launchUrl(emailUri)) {
+      _clearForm();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('फॉर्म यशस्वीरित्या जतन झाला!'),
+          content: Text('माहिती यशस्वीरित्या पाठवली गेली आहे!'),
           backgroundColor: Colors.green,
         ),
       );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('ईमेल पाठवता आला नाही'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
+
+    setState(() => _isLoading = false);
+  }
+
+  void _clearForm() {
+    _bachatGatNameController.clear();
+    _gaonController.clear();
+    _talukaController.clear();
+    _jilhaController.clear();
+    _mobileNumberController.clear();
+    _productsController.clear();
+    _establishmentController.clear();
+    _memberCountController.clear();
+    _expertRequired = 'No';
   }
 
   @override
@@ -61,7 +103,7 @@ class _NonadniPageState extends State<NonadniPage> {
       backgroundColor: const Color(0xFFF9F6F2),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: Form(
             key: _formKey,
             child: Column(
@@ -79,71 +121,53 @@ class _NonadniPageState extends State<NonadniPage> {
                 ),
                 const SizedBox(height: 15),
 
-                _buildInputField('बचत गटाचे नाव', _bachatGatNameController),
-                _buildInputField('गाव', _gaonController),
-                _buildInputField('तालुका', _talukaController),
-                _buildInputField('जिल्हा', _jilhaController),
-
-                Container(
-                  margin: const EdgeInsets.only(bottom: 15),
-                  child: TextFormField(
-                    controller: _mobileNumberController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: "मोबाईल नंबर",
-                      labelStyle: const TextStyle(color: Color(0xFF5D5145)),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: Colors.grey),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: Colors.grey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide:
-                            const BorderSide(color: Colors.green, width: 2),
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 15),
-                    ),
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(10),
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'मोबाईल नंबर आवश्यक आहे';
-                      } else if (value.length != 10) {
-                        return 'कृपया 10 अंकी मोबाईल नंबर भरा';
-                      }
-                      return null;
-                    },
-                  ),
+                _buildInputField(
+                  'बचत गटाचे नाव',
+                  _bachatGatNameController,
+                  icon: Icons.groups,
+                ),
+                _buildInputField(
+                  'गाव',
+                  _gaonController,
+                  icon: Icons.location_city,
+                ),
+                _buildInputField(
+                  'तालुका',
+                  _talukaController,
+                  icon: Icons.map,
+                ),
+                _buildInputField(
+                  'जिल्हा',
+                  _jilhaController,
+                  icon: Icons.location_on,
                 ),
 
-                _buildInputField('उत्पादने किंवा पीक', _productsController),
-                _buildInputField('बचत गट स्थापना', _establishmentController),
+                _buildMobileField(),
+
+                _buildInputField(
+                  'उत्पादने किंवा पीक',
+                  _productsController,
+                  icon: Icons.agriculture,
+                ),
+                _buildInputField(
+                  'बचत गट स्थापना',
+                  _establishmentController,
+                  icon: Icons.calendar_today,
+                ),
                 _buildInputField(
                   'बचत गट संख्या',
                   _memberCountController,
                   keyboardType: TextInputType.number,
+                  icon: Icons.people,
                 ),
 
                 const SizedBox(height: 15),
                 const Text(
-                  'तुम्हाला तज्ञाची गरज आहे का ? ',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF5D5145),
-                    fontWeight: FontWeight.bold,
-                  ),
+                  'तुम्हाला तज्ञाची गरज आहे का?',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 _buildRadioButton(),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
 
                 _buildSubmitButton(),
               ],
@@ -155,105 +179,100 @@ class _NonadniPageState extends State<NonadniPage> {
   }
 
   Widget _buildInputField(
-    String labelText,
+    String label,
     TextEditingController controller, {
     TextInputType keyboardType = TextInputType.text,
+    required IconData icon,
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
-        decoration: InputDecoration(
-          labelText: labelText,
-          labelStyle: const TextStyle(color: Color(0xFF5D5145)),
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(color: Colors.grey),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(color: Colors.grey),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(color: Colors.green, width: 2),
-          ),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'हे फील्ड आवश्यक आहे';
-          }
-          return null;
-        },
+        decoration: _inputDecoration(label, icon),
+        validator: (v) => v == null || v.isEmpty ? 'हे फील्ड आवश्यक आहे' : null,
       ),
     );
   }
 
-  
+  Widget _buildMobileField() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 15),
+      child: TextFormField(
+        controller: _mobileNumberController,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(10),
+          FilteringTextInputFormatter.digitsOnly,
+        ],
+        decoration: _inputDecoration('मोबाईल नंबर', Icons.phone_android),
+        validator: (v) =>
+            v == null || v.length != 10 ? '10 अंकी मोबाईल नंबर भरा' : null,
+      ),
+    );
+  }
+
+  InputDecoration _inputDecoration(String label, IconData icon) {
+    return InputDecoration(
+      labelText: label,
+      prefixIcon: Icon(icon, color: Colors.green),
+      filled: true,
+      fillColor: Colors.white,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: const BorderSide(color: Colors.green, width: 2),
+      ),
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    );
+  }
+
   Widget _buildRadioButton() {
     return Row(
       children: [
         Expanded(
-          child: ListTile(
-            title: const Text(
-              'हो',
-              style: TextStyle(color: Color(0xFF5D5145)),
-            ),
-            leading: Radio<String>(
-              value: 'Yes',
-              groupValue: _expertRequired,
-              onChanged: (String? value) {
-                setState(() {
-                  _expertRequired = value!;
-                });
-              },
-              activeColor: Colors.green,
-            ),
+          child: RadioListTile(
+            title: const Text('हो'),
+            value: 'Yes',
+            groupValue: _expertRequired,
+            onChanged: (v) => setState(() => _expertRequired = v!),
+            activeColor: Colors.green,
           ),
         ),
         Expanded(
-          child: ListTile(
-            title: const Text(
-              'नाही',
-              style: TextStyle(color: Color(0xFF5D5145)),
-            ),
-            leading: Radio<String>(
-              value: 'No',
-              groupValue: _expertRequired,
-              onChanged: (String? value) {
-                setState(() {
-                  _expertRequired = value!;
-                });
-              },
-              activeColor: Colors.green,
-            ),
+          child: RadioListTile(
+            title: const Text('नाही'),
+            value: 'No',
+            groupValue: _expertRequired,
+            onChanged: (v) => setState(() => _expertRequired = v!),
+            activeColor: Colors.green,
           ),
         ),
       ],
     );
   }
 
-
   Widget _buildSubmitButton() {
     return ElevatedButton(
-      onPressed: _submitForm,
+      onPressed: _isLoading ? null : _submitForm,
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
         backgroundColor: Colors.green,
-        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        padding: const EdgeInsets.symmetric(vertical: 15),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
-      child: const Text(
-        'जतन करा',
-        style: TextStyle(fontSize: 18),
-      ),
+      child: _isLoading
+          ? const SizedBox(
+              height: 22,
+              width: 22,
+              child: CircularProgressIndicator(
+                color: Colors.white,
+                strokeWidth: 2.5,
+              ),
+            )
+          : const Text('जतन करा', style: TextStyle(fontSize: 18)),
     );
   }
 }
