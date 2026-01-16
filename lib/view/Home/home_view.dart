@@ -1,3 +1,4 @@
+import 'package:bachatgat/view/Home/Conatiners/arajaFormat.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 // import 'package:bachatgat/res/colors/app_color.dart';
@@ -6,7 +7,7 @@ import 'package:bachatgat/view/Home/Conatiners/nondani.dart';
 import 'package:bachatgat/view/Home/Conatiners/kagadpatre.dart';
 import 'package:bachatgat/view/Home/Conatiners/pramanpatre.dart';
 import 'package:bachatgat/view/Home/Conatiners/gurukilli.dart';
-import 'package:bachatgat/view/Home/Conatiners/contact.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,13 +17,10 @@ class HomePage extends StatelessWidget {
     final List<String> images = [
       "assets/images/slider2.png",
 
-      "assets/images/p10.png",
       "assets/images/slider.png",
-
       "assets/images/p2.jpg",
       "assets/images/p3.jpg",
       "assets/images/p4.jpg",
-
       "assets/images/p5.jpg",
     ];
 
@@ -42,17 +40,19 @@ class HomePage extends StatelessWidget {
         "label": "अवश्य कागदपत्रे",
         "page": KagadpatreScreen(),
       },
-      {
-        "icon": Icons.vpn_key,
-        "label": "यशाची गुरुकिल्ली",
-        "page": GurukilliScreen(),
-      },
+
+      {"icon": Icons.description, "label": "अर्जाचा नमुना", "page": ArjachaNamunaScreen()},
+      
       {
         "icon": Icons.assignment,
         "label": "मूळ प्रमाणपत्रे",
         "page": PramanpatreScreen(),
       },
-      {"icon": Icons.contact_phone, "label": "संपर्क", "page": ContactScreen()},
+      {
+        "icon": Icons.vpn_key,
+        "label": "यशाची गुरुकिल्ली",
+        "page": GurukilliScreen(),
+      },
     ];
 
     return Scaffold(

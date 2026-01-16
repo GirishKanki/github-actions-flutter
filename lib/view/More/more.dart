@@ -1,7 +1,7 @@
 
+import 'package:bachatgat/view/More/containers/contactt.dart';
 import 'package:flutter/material.dart';
 import 'package:bachatgat/view/More/containers/prastavana.dart';
-import 'package:bachatgat/view/More/containers/arjachanamuna.dart';
 import 'package:bachatgat/view/More/containers/krushikame.dart';
 import 'package:bachatgat/view/More/containers/yashogatha.dart';
 import 'package:bachatgat/view/More/containers/acmchabaddal.dart';
@@ -112,17 +112,7 @@ class MeroPage extends StatelessWidget {
                       );
                     },
                   ),
-                  _buildSquareActionButton(
-                    context,
-                    text: 'अर्जाचा नमुना',
-                    icon: Icons.description,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const ArjachaNamunaScreen()),
-                      );
-                    },
-                  ),
+                  
                   _buildSquareActionButton(
                     context,
                     text: 'कृषीविषयक कामे',
@@ -142,6 +132,18 @@ class MeroPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const YashogathaScreen()),
+                      );
+                    },
+                  ),
+
+                  _buildSquareActionButton(
+                    context,
+                    text: 'संपर्क',
+                    icon: Icons.contact_mail,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  ContactScreen()),
                       );
                     },
                   ),
@@ -182,17 +184,17 @@ class MeroPage extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 16.0),
-                  _buildRectangleActionButton(
-                    context,
-                    text: 'संपर्क',
-                    icon: Icons.contact_mail,
-                      onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const AcmchabaddalScreen()),
-                      );
-                    },
-                  ),
+                  // _buildRectangleActionButton(
+                  //   context,
+                  //   text: 'संपर्क',
+                  //   icon: Icons.contact_mail,
+                  //     onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(builder: (context) =>  ContactScreen()),
+                  //     );
+                  //   },
+                  // ),
                 ],
               ),
             ],

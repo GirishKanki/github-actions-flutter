@@ -72,23 +72,23 @@ class WebsitePage extends StatelessWidget {
               _buildWebsiteContainer(
                 context,
                 'महाराष्ट्र स्पर्धाक्षम कृषी विकास प्रकल्प (MACP)',
-                'http://www.macp.gov.in/',
+                'https://msamb.com/',
                 Icons.trending_up,
               ),
               const SizedBox(height: 15),
 
               _buildWebsiteContainer(
                 context,
-                'कृषी तंत्रज्ञान व्यवस्थापन संस्था (ATMA)',
-                'https://atma.maharashtra.gov.in/',
+                'मा. बाळासाहेब ठाकरे कृषी व्यवसाय व ग्रामीण परिवर्तन (स्मार्ट) प्रकल्प',
+                'https://www.smart-mh.org/',
                 Icons.library_books,
               ),
               const SizedBox(height: 15),
 
               _buildWebsiteContainer(
                 context,
-                'महिला व बालविकास विभाग (WCD)',
-                'https://www.wcd.maharashtra.gov.in/mr/',
+                'पशुसंवर्धन व दुग्धव्यवसाय विभाग, महाराष्ट्र शासन',
+                'https://dahd.maharashtra.gov.in/',
                 Icons.family_restroom,
               ),
             ],

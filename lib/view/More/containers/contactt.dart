@@ -76,18 +76,18 @@ class ContactScreen extends StatelessWidget {
 
                   _buildContactItem(
                     'संस्था',
-                    'Averta Strategy Pvt. Ltd',
+                    'Agricultural Technology Management Agency (ATMA)',
                     Icons.business,
                   ),
                   _buildContactItem(
                     'ईमेल',
-                    'mukesh.avertatech@gmail.com',
+                    'atma@gmail.com',
                     Icons.email,
                   ),
 
                   _buildContactItem(
                     'संपर्क क्रमांक',
-                    '+91 8483001178',
+                    '+91 xxxyyyzzz',
                     Icons.phone,
                   ),
                   SizedBox(height: 10),

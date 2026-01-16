@@ -33,7 +33,7 @@ class AcmchabaddalScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
-                  'assets/images/atma.png',
+                  'assets/images/farmer3.png',
                   // height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,

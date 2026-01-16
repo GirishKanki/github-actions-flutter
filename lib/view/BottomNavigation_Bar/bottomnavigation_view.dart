@@ -35,9 +35,9 @@ class _BottomNavPageState extends State<BottomNavPage> {
 
   final List<Widget> _pages = const [
     HomePage(),
-    GatNirmitiPage(),
+    NonadniPage(), 
     WebsitePage(),
-    NonadniPage(),
+    GatNirmitiPage(),
     MeroPage(),
   ];
 
@@ -93,18 +93,20 @@ class _BottomNavPageState extends State<BottomNavPage> {
                   icon: Icon(Icons.home),
                   label: "मुखपृष्ठ",
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.group),
-                  label: "फायदे",
+                 BottomNavigationBarItem(
+                  icon: Icon(Icons.note_alt),
+                  label: "नोंदनी",
                 ),
+               
                 BottomNavigationBarItem(
                   icon: Icon(Icons.language),
                   label: "वेब",
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.note_alt),
-                  label: "नोंदनी",
+                 BottomNavigationBarItem(
+                  icon: Icon(Icons.group),
+                  label: "फायदे",
                 ),
+               
                 BottomNavigationBarItem(
                   icon: Icon(Icons.more_horiz),
                   label: "अधिक",
