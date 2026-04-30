@@ -1,0 +1,34 @@
+name: Build Flutter Web
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to build"
+        required: true
+        default: "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout selected branch
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      # Install Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.32.2'
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # Build web
+      - name: Build Flutter Web
+        run: flutter build web --release
