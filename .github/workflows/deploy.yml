@@ -71,7 +71,7 @@ jobs:
       #  Build for selected env
       - name: Build Flutter Web
         run: |
-          flutter build web --release
+          flutter build web --release --base-href=/
 
       # (Optional) if you deploy in subfolder
       # flutter build web --release --base-href=/
