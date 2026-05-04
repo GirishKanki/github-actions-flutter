@@ -1,34 +1,106 @@
-name: Build Flutter Web
+name: Flutter Web CI/CD
 
 on:
   workflow_dispatch:
     inputs:
       branch:
-        description: "Branch to build"
+        description: "Select Branch"
         required: true
         default: "main"
+      env:
+        description: "Select Environment"
+        required: true
+        default: "dev"
+        type: choice
+        options:
+          - dev
+          - ind
+          - prod
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout selected branch
+      #  Checkout selected branch
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.branch }}
 
-      # Install Flutter
+      #  Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.2'
 
-      # Install dependencies
+      #  Install dependencies
       - name: Install Dependencies
         run: flutter pub get
 
-      # Build web
+      #  Decide ENV CONFIG
+      - name: Set Environment Config
+        run: |
+          ENV="${{ github.event.inputs.env }}"
+
+          case "$ENV" in
+            dev)
+              echo "HOST=${{ secrets.DEV_HOST }}" >> $GITHUB_ENV
+              echo "USER=${{ secrets.DEV_USER }}" >> $GITHUB_ENV
+              echo "KEY=${{ secrets.DEV_KEY }}" >> $GITHUB_ENV
+              echo "DEPLOY_PATH=/var/www/html/GitHub-actions/flutter-dev" >> $GITHUB_ENV
+              ;;
+            
+            ind)
+              echo "HOST=${{ secrets.IND_HOST }}" >> $GITHUB_ENV
+              echo "USER=${{ secrets.IND_USER }}" >> $GITHUB_ENV
+              echo "KEY=${{ secrets.IND_KEY }}" >> $GITHUB_ENV
+              echo "DEPLOY_PATH=/var/www/html/flutter-ind" >> $GITHUB_ENV
+              ;;
+            
+            prod)
+              echo "HOST=${{ secrets.PROD_HOST }}" >> $GITHUB_ENV
+              echo "USER=${{ secrets.PROD_USER }}" >> $GITHUB_ENV
+              echo "KEY=${{ secrets.PROD_KEY }}" >> $GITHUB_ENV
+              echo "DEPLOY_PATH=/var/www/html/flutter-prod" >> $GITHUB_ENV
+              ;;
+            
+            *)
+              echo "Invalid environment"
+              exit 1
+              ;;
+          esac
+
+      #  Build for selected env
       - name: Build Flutter Web
-        run: flutter build web --release
+        run: |
+          flutter build web --release
+
+      # (Optional) if you deploy in subfolder
+      # flutter build web --release --base-href=/
+
+      - name: Show Build Files
+        run: ls -R build/web
+
+      #  Setup SSH
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$KEY" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
+
+      #  Copy Build
+      - name: Copy Build Files to Server
+        run: |
+          scp -r build/web/. $USER@$HOST:/tmp/flutter-build
+
+      #  Deploy
+      - name: Deploy to Web Server
+        run: |
+          ssh $USER@$HOST "
+            sudo rm -rf $DEPLOY_PATH/*
+            sudo mkdir -p $DEPLOY_PATH
+            sudo cp -r /tmp/flutter-build/. $DEPLOY_PATH/
+            sudo rm -rf /tmp/flutter-build/*
+          "
