@@ -43,28 +43,25 @@ jobs:
         run: |
           ENV="${{ github.event.inputs.env }}"
 
-          case "$ENV" in
+           case "$ENV" in
             dev)
               echo "HOST=${{ secrets.DEV_HOST }}" >> $GITHUB_ENV
               echo "USER=${{ secrets.DEV_USER }}" >> $GITHUB_ENV
-              echo "KEY=${{ secrets.DEV_KEY }}" >> $GITHUB_ENV
               echo "DEPLOY_PATH=/var/www/html/GitHub-actions/flutter-dev" >> $GITHUB_ENV
               ;;
-            
+      
             ind)
               echo "HOST=${{ secrets.IND_HOST }}" >> $GITHUB_ENV
               echo "USER=${{ secrets.IND_USER }}" >> $GITHUB_ENV
-              echo "KEY=${{ secrets.IND_KEY }}" >> $GITHUB_ENV
               echo "DEPLOY_PATH=/var/www/html/flutter-ind" >> $GITHUB_ENV
               ;;
-            
+      
             prod)
               echo "HOST=${{ secrets.PROD_HOST }}" >> $GITHUB_ENV
               echo "USER=${{ secrets.PROD_USER }}" >> $GITHUB_ENV
-              echo "KEY=${{ secrets.PROD_KEY }}" >> $GITHUB_ENV
               echo "DEPLOY_PATH=/var/www/html/flutter-prod" >> $GITHUB_ENV
               ;;
-            
+      
             *)
               echo "Invalid environment"
               exit 1
