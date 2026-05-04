@@ -43,7 +43,7 @@ jobs:
         run: |
           ENV="${{ github.event.inputs.env }}"
 
-           case "$ENV" in
+          case "$ENV" in
             dev)
               echo "HOST=${{ secrets.DEV_HOST }}" >> $GITHUB_ENV
               echo "USER=${{ secrets.DEV_USER }}" >> $GITHUB_ENV
@@ -83,7 +83,15 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "$KEY" | tr -d '\r' > ~/.ssh/id_rsa
+
+          if [ "${{ github.event.inputs.env }}" = "dev" ]; then
+            echo "${{ secrets.DEV_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+          elif [ "${{ github.event.inputs.env }}" = "ind" ]; then
+            echo "${{ secrets.IND_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+          else
+            echo "${{ secrets.PROD_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+          fi
+
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
 
